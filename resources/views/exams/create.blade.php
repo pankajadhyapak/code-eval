@@ -84,9 +84,25 @@
                 return false;
             }else{
                 if (confirm("You Sure to Submit Code ?? It Cannot be Edited Again") == true) {
-                    {{--code = value;--}}
-                    {{--var token = $('#codeEditorToken').val();--}}
-                    {{--var formData = {'_token': token,'code': code,'question_code':{{ $question->id }},'exam_id': '{{ $question->id }}' };--}}
+                    code = value;
+                    var token = $('#codeEditorToken').val();
+                    var formData = {'_token': token,'code': code,'question_code':{{ $question->id }},'exam_id': '{{ $question->id }}' };
+
+                    $.ajax({
+                        url: "{{ url("code/submit") }}",
+                        type: "POST",
+                        data: formData,
+                        success: function (data, textStatus, jqXHR) {
+                            if(data){
+                                window.onbeforeunload = null;
+                                window.location = "{{ url("home") }}";
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                        alert('woops !!, SOmething Went Wrong!! Please try again');
+
+                    }
+                    });
                 }
             }
         });

@@ -1,50 +1,5 @@
 <?php
 
-//Route::get("test", function(){
-//
-////generate Random String
-//    $fileName = \Illuminate\Support\Str::random(10);
-//    //$fileName = "filename";
-//
-//    $filePath = public_path().'/files/'.$fileName.'.php';
-//    File::put($filePath, Request::get('code'));
-//
-//    $ContainerPath = public_path().'/files/'.$fileName.'Conatiner.php';
-//
-//    $mustache = new Mustache_Engine;
-//
-//    $examId = 1;
-//    $examObj = \App\Question::find($examId);
-//
-//    $inputArray = $examObj->testCases->lists('input');
-//    $outPutArray = $examObj->testCases->lists('output');
-//
-//    $tem = $mustache->render(file_get_contents(public_path()."/templates/php/Single.template"),[
-//        'fileName' => $fileName,
-//        'inputArray' => '['.implode(",",$inputArray).']',
-//        'outPutArray' => '['.implode(",",$outPutArray).']'
-//    ]);
-//    file_put_contents($ContainerPath,$tem);
-//
-//
-//
-//});
-
-Route::get("dipu", function(){
-	
-	return Response::download("hak.mp3");
-
-	
-});
-
-Route::get("tests", function(){
-	
-	return phpinfo();
-
-	
-});
-
-
 Route::post('exam/codeExec', function(){
 
     return \Execute::run(Request::get('lang'));
@@ -59,11 +14,11 @@ Route::post('exam/codeExec', function(){
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::post("code/submit", "ExamController@saveResult");
 
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
-
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

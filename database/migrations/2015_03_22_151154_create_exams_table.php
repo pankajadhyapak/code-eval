@@ -15,13 +15,10 @@ class CreateExamsTable extends Migration {
 		Schema::create('exams', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('exam_code');
+			$table->string('question_id');
 			$table->integer('student_id');
-			$table->string('start_time');
-			$table->string('end_time');
+			$table->text("code");
 			$table->integer('passed_test_cases');
-			$table->integer('score');
-			$table->string('language');
 			$table->timestamps();
 		});
 	}

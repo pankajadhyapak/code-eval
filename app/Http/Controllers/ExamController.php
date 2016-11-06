@@ -52,6 +52,19 @@ class ExamController extends Controller {
 
 	}
 
+	public function saveResult()
+	{
+		$data = Input::all();
+		$exam =  new \App\Exam;
+		$exam->question_id = $data['question_code'];
+		$exam->code = $data['code'];
+		$exam->student_id = \Auth::id();
+		$exam->passed_test_cases = \Session::get(\Auth::id()."testCases", 0);
+		$exam->save();
+		return ['success' => 'true'];
+		
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
